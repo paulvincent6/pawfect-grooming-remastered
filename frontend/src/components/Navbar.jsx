@@ -25,10 +25,15 @@ function Navbar() {
         {user ? (
           <>
             {" | "}
+            <Link to="/pets">My Pets</Link>
+          
+            {" | "}
             <Link to="/booking">Book Appointment</Link>
 
             {" | "}
             <Link to="/appointments">My Appointments</Link>
+
+            
 
             {" | "}
             <span>Welcome, {user.full_name}</span>
