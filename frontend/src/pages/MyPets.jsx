@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 
 function MyPets() {
+
+  // ========================================
+  // STATE
+  // ========================================
+
   const [pets, setPets] = useState([]);
   const [message, setMessage] = useState("");
 
@@ -14,6 +19,11 @@ function MyPets() {
     notes: "",
   });
 
+
+  // ========================================
+  // HANDLE FORM INPUT CHANGES
+  // ========================================
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,8 +31,17 @@ function MyPets() {
     });
   };
 
+
+  // ========================================
+  // GET LOGGED-IN USER'S PETS
+  // ========================================
+
   const getPets = async () => {
     const token = localStorage.getItem("token");
+
+    if (!token) {
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -38,20 +57,37 @@ function MyPets() {
 
       if (response.ok) {
         setPets(data);
+      } else {
+        console.error("Failed to retrieve pets:", data);
       }
     } catch (error) {
       console.error("Failed to retrieve pets:", error);
     }
   };
 
+
+  // ========================================
+  // LOAD PETS WHEN PAGE OPENS
+  // ========================================
+
   useEffect(() => {
     getPets();
   }, []);
+
+
+  // ========================================
+  // ADD NEW PET
+  // ========================================
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const token = localStorage.getItem("token");
+
+    if (!token) {
+      setMessage("Please login before adding a pet.");
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -73,6 +109,8 @@ function MyPets() {
       setMessage(data.message);
 
       if (response.ok) {
+
+        // Clear form
         setFormData({
           name: "",
           pet_type: "",
@@ -82,6 +120,7 @@ function MyPets() {
           notes: "",
         });
 
+        // Refresh pet list
         getPets();
       }
     } catch (error) {
@@ -89,16 +128,27 @@ function MyPets() {
     }
   };
 
+
+  // ========================================
+  // PAGE
+  // ========================================
+
   return (
     <>
       <Navbar />
 
       <main>
+
+        {/* =================================
+            ADD PET FORM
+        ================================= */}
+
         <h1>My Pets</h1>
 
         <h2>Add Pet</h2>
 
         <form onSubmit={handleSubmit}>
+
           <div>
             <label>Pet Name</label>
             <br />
@@ -109,8 +159,10 @@ function MyPets() {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter pet name"
+              required
             />
           </div>
+
 
           <div>
             <label>Pet Type</label>
@@ -120,12 +172,14 @@ function MyPets() {
               name="pet_type"
               value={formData.pet_type}
               onChange={handleChange}
+              required
             >
               <option value="">Select Pet Type</option>
               <option value="Dog">Dog</option>
               <option value="Cat">Cat</option>
             </select>
           </div>
+
 
           <div>
             <label>Breed</label>
@@ -139,6 +193,7 @@ function MyPets() {
               placeholder="Enter breed"
             />
           </div>
+
 
           <div>
             <label>Sex</label>
@@ -155,6 +210,7 @@ function MyPets() {
             </select>
           </div>
 
+
           <div>
             <label>Birthday</label>
             <br />
@@ -166,6 +222,7 @@ function MyPets() {
               onChange={handleChange}
             />
           </div>
+
 
           <div>
             <label>Notes</label>
@@ -179,14 +236,27 @@ function MyPets() {
             />
           </div>
 
+          <br />
+
           <button type="submit">
             Add Pet
           </button>
+
         </form>
+
+
+        {/* =================================
+            STATUS MESSAGE
+        ================================= */}
 
         {message && <p>{message}</p>}
 
         <hr />
+
+
+        {/* =================================
+            USER'S PET LIST
+        ================================= */}
 
         <h2>Your Pets</h2>
 
@@ -195,16 +265,35 @@ function MyPets() {
         ) : (
           pets.map((pet) => (
             <div key={pet.pet_id}>
+
               <h3>{pet.name}</h3>
 
               <p>Type: {pet.pet_type}</p>
-              <p>Breed: {pet.breed || "N/A"}</p>
-              <p>Sex: {pet.sex || "N/A"}</p>
+
+              <p>
+                Breed: {pet.breed || "N/A"}
+              </p>
+
+              <p>
+                Sex: {pet.sex || "N/A"}
+              </p>
+
+              <p>
+                Birthday: {pet.birth_day
+                  ? new Date(pet.birth_day).toLocaleDateString()
+                  : "N/A"}
+              </p>
+
+              <p>
+                Notes: {pet.notes || "N/A"}
+              </p>
 
               <hr />
+
             </div>
           ))
         )}
+
       </main>
     </>
   );

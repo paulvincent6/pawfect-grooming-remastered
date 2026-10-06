@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 function Booking() {
   const navigate = useNavigate();
 
+  // =========================================
+  // DATA FROM DATABASE
+  // =========================================
+  const [pets, setPets] = useState([]);
+  const [services, setServices] = useState([]);
+
+
+  // =========================================
+  // BOOKING FORM DATA
+  // =========================================
   const [formData, setFormData] = useState({
-    pet_name: "",
-    pet_type: "",
-    service: "",
+    pet_id: "",
+    service_id: "",
     appointment_date: "",
     appointment_time: "",
     notes: "",
@@ -16,6 +25,62 @@ function Booking() {
 
   const [message, setMessage] = useState("");
 
+
+  // =========================================
+  // GET LOGGED-IN USER TOKEN
+  // =========================================
+  const token = localStorage.getItem("token");
+
+
+  // =========================================
+  // LOAD USER'S PETS AND AVAILABLE SERVICES
+  // =========================================
+  useEffect(() => {
+    if (!token) {
+      setMessage("Please login before booking an appointment.");
+      return;
+    }
+
+
+    // -----------------------------------------
+    // GET LOGGED-IN USER'S PETS
+    // -----------------------------------------
+    fetch("http://localhost:5000/api/pets/my", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setPets(data);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to load pets:", error);
+      });
+
+
+    // -----------------------------------------
+    // GET ACTIVE GROOMING SERVICES
+    // -----------------------------------------
+    fetch("http://localhost:5000/api/services")
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setServices(data);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to load services:", error);
+      });
+
+  }, [token]);
+
+
+  // =========================================
+  // UPDATE FORM WHEN USER TYPES OR SELECTS
+  // =========================================
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -23,53 +88,68 @@ function Booking() {
     });
   };
 
+
+  // =========================================
+  // SUBMIT BOOKING
+  // =========================================
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token");
-
+    // User must be logged in
     if (!token) {
       setMessage("Please login before booking an appointment.");
       return;
     }
 
     try {
+
+      // Send appointment information to backend
       const response = await fetch(
         "http://localhost:5000/api/appointments",
         {
           method: "POST",
+
           headers: {
             "Content-Type": "application/json",
-
-            // Send JWT to backend
             Authorization: `Bearer ${token}`,
           },
+
           body: JSON.stringify(formData),
         }
       );
 
       const data = await response.json();
 
+      // Display backend response
       setMessage(data.message);
 
+
+      // If booking was successful
       if (response.ok) {
+
+        // Clear booking form
         setFormData({
-          pet_name: "",
-          pet_type: "",
-          service: "",
+          pet_id: "",
+          service_id: "",
           appointment_date: "",
           appointment_time: "",
           notes: "",
         });
 
-        // Go to My Appointments
+        // Redirect to My Appointments
         navigate("/appointments");
       }
+
     } catch (error) {
+      console.error(error);
       setMessage("Unable to connect to the server.");
     }
   };
 
+
+  // =========================================
+  // BOOKING PAGE
+  // =========================================
   return (
     <>
       <Navbar />
@@ -78,50 +158,67 @@ function Booking() {
         <h1>Book Appointment</h1>
 
         <form onSubmit={handleSubmit}>
-          <div>
-            <label>Pet Name</label>
-            <br />
 
-            <input
-              type="text"
-              name="pet_name"
-              value={formData.pet_name}
-              onChange={handleChange}
-              placeholder="Enter pet name"
-            />
-          </div>
 
+          {/* ===================================
+              PET SELECTION
+              =================================== */}
           <div>
-            <label>Pet Type</label>
+            <label>Pet</label>
             <br />
 
             <select
-              name="pet_type"
-              value={formData.pet_type}
+              name="pet_id"
+              value={formData.pet_id}
               onChange={handleChange}
+              required
             >
-              <option value="">Select Pet Type</option>
-              <option value="Dog">Dog</option>
-              <option value="Cat">Cat</option>
+              <option value="">Select Your Pet</option>
+
+              {pets.map((pet) => (
+                <option
+                  key={pet.pet_id}
+                  value={pet.pet_id}
+                >
+                  {pet.name} - {pet.pet_type}
+                </option>
+              ))}
+
             </select>
           </div>
 
+
+          {/* ===================================
+              SERVICE SELECTION
+              =================================== */}
           <div>
             <label>Service</label>
             <br />
 
             <select
-              name="service"
-              value={formData.service}
+              name="service_id"
+              value={formData.service_id}
               onChange={handleChange}
+              required
             >
               <option value="">Select Service</option>
-              <option value="Bath">Bath</option>
-              <option value="Full Groom">Full Groom</option>
-              <option value="Nail Trim">Nail Trim</option>
+
+              {services.map((service) => (
+                <option
+                  key={service.service_id}
+                  value={service.service_id}
+                >
+                  {service.name} - ₱{service.price}
+                </option>
+              ))}
+
             </select>
           </div>
 
+
+          {/* ===================================
+              APPOINTMENT DATE
+              =================================== */}
           <div>
             <label>Appointment Date</label>
             <br />
@@ -131,9 +228,14 @@ function Booking() {
               name="appointment_date"
               value={formData.appointment_date}
               onChange={handleChange}
+              required
             />
           </div>
 
+
+          {/* ===================================
+              APPOINTMENT TIME
+              =================================== */}
           <div>
             <label>Appointment Time</label>
             <br />
@@ -143,9 +245,14 @@ function Booking() {
               name="appointment_time"
               value={formData.appointment_time}
               onChange={handleChange}
+              required
             />
           </div>
 
+
+          {/* ===================================
+              OPTIONAL NOTES
+              =================================== */}
           <div>
             <label>Notes (Optional)</label>
             <br />
@@ -158,12 +265,30 @@ function Booking() {
             />
           </div>
 
+          <br />
+
+
+          {/* ===================================
+              SUBMIT BOOKING
+              =================================== */}
           <button type="submit">
             Book Appointment
           </button>
+
         </form>
 
+
+        {/* DISPLAY SUCCESS OR ERROR MESSAGE */}
         {message && <p>{message}</p>}
+
+
+        {/* WARN USER IF THEY HAVE NO PETS */}
+        {pets.length === 0 && token && (
+          <p>
+            You don't have any pets yet. Add a pet before booking.
+          </p>
+        )}
+
       </main>
     </>
   );

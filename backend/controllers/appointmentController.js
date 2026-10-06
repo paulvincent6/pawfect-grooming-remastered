@@ -3,18 +3,19 @@ const db = require("../config/database");
 // CREATE APPOINTMENT
 const createAppointment = (req, res) => {
   const {
-    pet_name,
-    pet_type,
-    service,
+    pet_id,
+    service_id,
     appointment_date,
     appointment_time,
     notes,
   } = req.body;
 
+  const userId = req.user.id;
+
+  // Check required fields
   if (
-    !pet_name ||
-    !pet_type ||
-    !service ||
+    !pet_id ||
+    !service_id ||
     !appointment_date ||
     !appointment_time
   ) {
@@ -23,42 +24,86 @@ const createAppointment = (req, res) => {
     });
   }
 
-  const userId = req.user.id;
-
+  // Make sure the pet belongs to the logged-in user
   db.query(
-    `INSERT INTO appointments
-    (
-      user_id,
-      pet_name,
-      pet_type,
-      service,
-      appointment_date,
-      appointment_time,
-      notes
-    )
-    VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    [
-      userId,
-      pet_name,
-      pet_type,
-      service,
-      appointment_date,
-      appointment_time,
-      notes || null,
-    ],
-    (error, result) => {
-      if (error) {
-        console.error(error);
+    "SELECT * FROM pets WHERE pet_id = ? AND user_id = ?",
+    [pet_id, userId],
+    (petError, petResults) => {
+      if (petError) {
+        console.error("Pet check error:", petError);
 
         return res.status(500).json({
-          message: "Failed to create appointment.",
+          message: "Failed to verify pet.",
         });
       }
 
-      return res.status(201).json({
-        message: "Appointment booked successfully!",
-        appointmentId: result.insertId,
-      });
+      if (petResults.length === 0) {
+        return res.status(404).json({
+          message: "Pet not found.",
+        });
+      }
+
+      // Get selected service
+      db.query(
+        "SELECT * FROM services WHERE service_id = ? AND status = 'active'",
+        [service_id],
+        (serviceError, serviceResults) => {
+          if (serviceError) {
+            console.error("Service check error:", serviceError);
+
+            return res.status(500).json({
+              message: "Failed to verify service.",
+            });
+          }
+
+          if (serviceResults.length === 0) {
+            return res.status(404).json({
+              message: "Service not found.",
+            });
+          }
+
+          const service = serviceResults[0];
+
+          // Create appointment
+          db.query(
+            `INSERT INTO appointments
+            (
+              user_id,
+              pet_id,
+              service_id,
+              appointment_date,
+              appointment_time,
+              amount,
+              status,
+              notes
+            )
+            VALUES (?, ?, ?, ?, ?, ?, 'pending', ?)`,
+            [
+              userId,
+              pet_id,
+              service_id,
+              appointment_date,
+              appointment_time,
+              service.price,
+              notes || null,
+            ],
+            (error, result) => {
+              if (error) {
+                console.error("Create appointment error:", error);
+
+                return res.status(500).json({
+                  message: "Failed to create appointment.",
+                });
+              }
+
+              return res.status(201).json({
+                message: "Appointment booked successfully!",
+                appointmentId: result.insertId,
+              });
+            }
+          );
+        }
+      );
     }
   );
 };
@@ -69,21 +114,49 @@ const getMyAppointments = (req, res) => {
   const userId = req.user.id;
 
   db.query(
-    `SELECT *
-     FROM appointments
-     WHERE user_id = ?
-     ORDER BY appointment_date ASC, appointment_time ASC`,
+    `SELECT
+        a.appointment_id,
+        a.appointment_date,
+        a.appointment_time,
+        a.status,
+        a.amount,
+        a.notes,
+
+        p.pet_id,
+        p.name AS pet_name,
+        p.pet_type,
+        p.breed,
+
+        s.service_id,
+        s.name AS service_name,
+        s.description AS service_description,
+        s.price,
+        s.duration
+
+     FROM appointments a
+
+     JOIN pets p
+       ON a.pet_id = p.pet_id
+
+     JOIN services s
+       ON a.service_id = s.service_id
+
+     WHERE a.user_id = ?
+
+     ORDER BY
+       a.appointment_date ASC,
+       a.appointment_time ASC`,
     [userId],
     (error, results) => {
       if (error) {
-        console.error(error);
+        console.error("Get appointments error:", error);
 
         return res.status(500).json({
           message: "Failed to retrieve appointments.",
         });
       }
 
-      return res.json(results);
+      return res.status(200).json(results);
     }
   );
 };

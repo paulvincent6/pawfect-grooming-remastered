@@ -8,6 +8,8 @@ const authRoutes = require("./routes/authRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
 const petRoutes = require("./routes/petRoutes");
 
+const serviceRoutes = require("./routes/serviceRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -16,6 +18,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/pets", petRoutes);
+app.use("/api/services", serviceRoutes);
 
 app.get("/", (req, res) => {
   res.send("Pawfect Grooming API is running!");
