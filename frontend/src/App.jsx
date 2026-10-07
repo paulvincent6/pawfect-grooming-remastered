@@ -7,15 +7,17 @@ import Booking from "./pages/Booking";
 import MyPets from "./pages/MyPets";
 import MyAppointments from "./pages/MyAppointments";
 
+// ADMIN
 import Dashboard from "./pages/admin/Dashboard";
-import AdminAppointments from "./pages/admin/Appointments"; 
-import Customers from "./pages/admin/Customers";
-import Services from "./pages/admin/Services";
+import AdminAppointments from "./pages/admin/Appointments";
+import Reviews from "./pages/admin/Review";
+import Settings from "./pages/admin/Settings";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* CUSTOMER */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -25,12 +27,13 @@ function App() {
 
         {/* ADMIN */}
         <Route path="/admin" element={<Dashboard />} />
+
         <Route path="/admin/appointments" element={<AdminAppointments />} />
-        <Route path="/admin/customers" element={<Customers />} />
-        <Route path="/admin/services" element={<Services />} />
 
+        <Route path="/admin/reviews" element={<Reviews />} />
 
-
+        <Route path="/admin/settings" element={<Settings />} />
+        
       </Routes>
     </BrowserRouter>
   );

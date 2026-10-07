@@ -11,22 +11,40 @@ function AdminSidebar() {
   };
 
   return (
-    <nav>
-      <h2>Pawfect Admin</h2>
-
-      <Link to="/admin">Overview</Link>
-      {" | "}
-      <Link to="/admin/appointments">Appointments</Link>
-      {" | "}
-      <Link to="/admin/customers">Customers</Link>
-      {" | "}
-      <Link to="/admin/services">Services</Link>
-      {" | "}
-
-      <button onClick={handleLogout}>Logout</button>
+    <aside>
+      <h2>🐾 Pawfect</h2>
+      <p>Admin Dashboard</p>
 
       <hr />
-    </nav>
+
+      <nav>
+        <p>
+          📊 <Link to="/admin">Overview</Link>
+        </p>
+
+        <p>
+          📅 <Link to="/admin/appointments">Appointments</Link>
+        </p>
+
+        <p>
+          ⭐ <Link to="/admin/reviews">Reviews</Link>
+        </p>
+
+        <p>
+          ⚙️ <Link to="/admin/settings">Settings</Link>
+        </p>
+      </nav>
+
+      <hr />
+
+      <p>
+        <Link to="/">← Back to Website</Link>
+      </p>
+
+      <button onClick={handleLogout}>
+        Logout
+      </button>
+    </aside>
   );
 }
 

@@ -1,17 +1,16 @@
 import AdminSidebar from "../../components/AdminSidebar";
 
-function Customers() {
+function Settings() {
   return (
     <>
       <AdminSidebar />
 
       <main>
-        <h1>Customer Management</h1>
-
-        <p>Registered customers will appear here.</p>
+        <h1>⚙️ Settings</h1>
+        <p>Admin settings will appear here.</p>
       </main>
     </>
   );
 }
 
-export default Customers;
+export default Settings;
