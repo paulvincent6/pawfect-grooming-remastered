@@ -24,6 +24,29 @@ const createAppointment = (req, res) => {
     });
   }
 
+  // ==========================================
+  // VALIDATE APPOINTMENT TIME
+  // Shop hours: 9:00 AM - 6:00 PM
+  // Last appointment starts at 5:00 PM
+  // ==========================================
+  const allowedTimes = [
+    "09:00:00",
+    "10:00:00",
+    "11:00:00",
+    "12:00:00",
+    "13:00:00",
+    "14:00:00",
+    "15:00:00",
+    "16:00:00",
+    "17:00:00",
+  ];
+
+  if (!allowedTimes.includes(appointment_time)) {
+    return res.status(400).json({
+      message: "Please select a valid appointment time.",
+    });
+  }
+
   // Make sure the pet belongs to the logged-in user
   db.query(
     "SELECT * FROM pets WHERE pet_id = ? AND user_id = ?",
@@ -161,8 +184,63 @@ const getMyAppointments = (req, res) => {
   );
 };
 
+// GET ALL APPOINTMENTS - ADMIN
+const getAllAppointments = (req, res) => {
+  db.query(
+    `SELECT
+        a.appointment_id,
+        a.appointment_date,
+        a.appointment_time,
+        a.status,
+        a.amount,
+        a.notes,
+
+        u.user_id,
+        u.name AS customer_name,
+        u.email AS customer_email,
+        u.phone AS customer_phone,
+
+        p.pet_id,
+        p.name AS pet_name,
+        p.pet_type,
+        p.breed,
+
+        s.service_id,
+        s.name AS service_name,
+        s.price,
+        s.duration
+
+     FROM appointments a
+
+     JOIN users u
+       ON a.user_id = u.user_id
+
+     JOIN pets p
+       ON a.pet_id = p.pet_id
+
+     JOIN services s
+       ON a.service_id = s.service_id
+
+     ORDER BY
+       a.appointment_date ASC,
+       a.appointment_time ASC`,
+    (error, results) => {
+      if (error) {
+        console.error("Get all appointments error:", error);
+
+        return res.status(500).json({
+          message: "Failed to retrieve appointments.",
+        });
+      }
+
+      return res.status(200).json(results);
+    }
+  );
+};
+
 
 module.exports = {
   createAppointment,
   getMyAppointments,
+  getAllAppointments,
 };

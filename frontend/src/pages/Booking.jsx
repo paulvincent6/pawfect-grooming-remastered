@@ -188,32 +188,31 @@ function Booking() {
           </div>
 
 
-          {/* ===================================
-              SERVICE SELECTION
-              =================================== */}
-          <div>
-            <label>Service</label>
-            <br />
+          {/* =========================================
+                  SERVICE SELECTION
+              ========================================= */}
+              <div>
+                <label>Service</label>
+                <br />
 
-            <select
-              name="service_id"
-              value={formData.service_id}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Service</option>
-
-              {services.map((service) => (
-                <option
-                  key={service.service_id}
-                  value={service.service_id}
+                <select
+                  name="service_id"
+                  value={formData.service_id}
+                  onChange={handleChange}
+                  required
                 >
-                  {service.name} - ₱{service.price}
-                </option>
-              ))}
+                  <option value="">Select Service</option>
 
-            </select>
-          </div>
+                  {services.map((service) => (
+                    <option
+                      key={service.service_id}
+                      value={service.service_id}
+                    >
+                      {service.name} - ₱{service.price}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
 
           {/* ===================================
@@ -233,21 +232,33 @@ function Booking() {
           </div>
 
 
-          {/* ===================================
-              APPOINTMENT TIME
-              =================================== */}
-          <div>
-            <label>Appointment Time</label>
-            <br />
+          {/* ==========================================
+                  APPOINTMENT TIME
+                  Available every hour during working hours
+              ========================================== */}
+              <div>
+                <label>Appointment Time</label>
+                <br />
 
-            <input
-              type="time"
-              name="appointment_time"
-              value={formData.appointment_time}
-              onChange={handleChange}
-              required
-            />
-          </div>
+                <select
+                  name="appointment_time"
+                  value={formData.appointment_time}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select Appointment Time</option>
+
+                  <option value="09:00:00">9:00 AM</option>
+                  <option value="10:00:00">10:00 AM</option>
+                  <option value="11:00:00">11:00 AM</option>
+                  <option value="12:00:00">12:00 PM</option>
+                  <option value="13:00:00">1:00 PM</option>
+                  <option value="14:00:00">2:00 PM</option>
+                  <option value="15:00:00">3:00 PM</option>
+                  <option value="16:00:00">4:00 PM</option>
+                  <option value="17:00:00">5:00 PM</option>
+                </select>
+              </div>
 
 
           {/* ===================================
