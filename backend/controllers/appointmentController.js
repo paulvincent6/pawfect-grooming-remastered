@@ -237,10 +237,72 @@ const getAllAppointments = (req, res) => {
     }
   );
 };
+// UPDATE APPOINTMENT STATUS - ADMIN
+const updateAppointmentStatus = (req, res) => {
+  const appointmentId = req.params.id;
+  const { status } = req.body;
+
+  const allowedStatuses = [
+    "pending",
+    "confirmed",
+    "completed",
+    "cancelled",
+  ];
+
+  // Check if status is valid
+  if (!status || !allowedStatuses.includes(status)) {
+    return res.status(400).json({
+      message: "Invalid appointment status.",
+    });
+  }
+
+  // Check if appointment exists
+  db.query(
+    "SELECT * FROM appointments WHERE appointment_id = ?",
+    [appointmentId],
+    (checkError, results) => {
+      if (checkError) {
+        console.error("Check appointment error:", checkError);
+
+        return res.status(500).json({
+          message: "Failed to verify appointment.",
+        });
+      }
+
+      if (results.length === 0) {
+        return res.status(404).json({
+          message: "Appointment not found.",
+        });
+      }
+
+      // Update status
+      db.query(
+        `UPDATE appointments
+         SET status = ?
+         WHERE appointment_id = ?`,
+        [status, appointmentId],
+        (error) => {
+          if (error) {
+            console.error("Update appointment status error:", error);
+
+            return res.status(500).json({
+              message: "Failed to update appointment status.",
+            });
+          }
+
+          return res.status(200).json({
+            message: "Appointment status updated successfully!",
+          });
+        }
+      );
+    }
+  );
+};
 
 
 module.exports = {
   createAppointment,
   getMyAppointments,
   getAllAppointments,
+  updateAppointmentStatus,
 };

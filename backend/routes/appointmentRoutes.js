@@ -3,6 +3,8 @@ const express = require("express");
 const {
   createAppointment,
   getMyAppointments,
+  getAllAppointments,
+  updateAppointmentStatus,
 } = require("../controllers/appointmentController");
 
 const authenticateToken = require("../middleware/authMiddleware");
@@ -23,6 +25,22 @@ router.get(
   "/my",
   authenticateToken,
   getMyAppointments
+);
+
+
+// GET ALL APPOINTMENTS - ADMIN
+router.get(
+  "/",
+  authenticateToken,
+  getAllAppointments
+);
+
+
+// UPDATE APPOINTMENT STATUS - ADMIN
+router.put(
+  "/:id/status",
+  authenticateToken,
+  updateAppointmentStatus
 );
 
 
