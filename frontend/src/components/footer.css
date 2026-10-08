@@ -1,0 +1,73 @@
+
+/* =====================================
+   PAWFECT GROOMING - FOOTER
+===================================== */
+
+.site-footer {
+  background: #38251b;
+  color: #fff7e6;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+  width: 100%;
+}
+
+.site-footer-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 55px 22px 45px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: 50px;
+}
+
+.site-footer h2 {
+  font-size: 23px;
+  color: white;
+  margin: 0 0 14px;
+}
+
+.site-footer h3 {
+  font-size: 17px;
+  color: white;
+  margin: 0 0 18px;
+}
+
+.site-footer p {
+  color: #e4d4c7;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 0 9px;
+}
+
+.site-footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.site-footer-links a {
+  display: block;
+  color: #e4d4c7;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.site-footer-links a:hover {
+  color: #69c6bf;
+}
+
+.site-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: center;
+  padding: 18px 20px;
+  font-size: 13px;
+  color: #cbb8a9;
+}
+
+@media (max-width: 750px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 40px 24px;
+  }
+}

@@ -1,0 +1,432 @@
+
+/* ========================================
+   MY PETS PAGE
+======================================== */
+
+.mypets-page {
+  min-height: 100vh;
+  background: #fff7e6;
+  color: #382013;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+}
+
+/* HERO */
+
+.mypets-hero {
+  position: relative;
+  overflow: hidden;
+  background: #5bb5b0;
+  min-height: 248px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 35px 20px;
+  box-sizing: border-box;
+}
+
+.mypets-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 580px;
+}
+
+.mypets-eyebrow {
+  color: #e8fff5;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.mypets-hero h1 {
+  color: white;
+  font-size: clamp(38px, 5vw, 52px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 10px 0 12px;
+}
+
+.mypets-hero p {
+  color: white;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.mypets-hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.mypets-circle-left {
+  width: 165px;
+  height: 165px;
+  top: -53px;
+  left: -53px;
+}
+
+.mypets-circle-right {
+  width: 190px;
+  height: 190px;
+  bottom: -64px;
+  right: 35px;
+}
+
+/* CONTENT LAYOUT */
+
+.mypets-content {
+  padding: 55px 22px 85px;
+}
+
+.mypets-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 480px minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+}
+
+/* ADD PET CARD */
+
+.mypets-add-card {
+  background: white;
+  border: 1px solid #ffd1d9;
+  border-radius: 24px;
+  padding: 31px;
+  box-shadow: 0 3px 7px rgba(75, 42, 27, 0.04);
+  box-sizing: border-box;
+}
+
+.mypets-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.mypets-section-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+  margin-bottom: 7px;
+}
+
+.mypets-pink {
+  color: #eb8585;
+}
+
+.mypets-teal {
+  color: #4aa8a3;
+}
+
+.mypets-card-heading h2,
+.mypets-profiles-header h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #382013;
+}
+
+.mypets-add-icon {
+  background: #f9dce1;
+  color: #382013;
+  border-radius: 15px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+/* FORM */
+
+.mypets-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mypets-field {
+  min-width: 0;
+}
+
+.mypets-field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 9px;
+  color: #382013;
+}
+
+.mypets-field label span {
+  color: #e9897f;
+}
+
+.mypets-field input,
+.mypets-field select,
+.mypets-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ffc5cf;
+  border-radius: 12px;
+  background: #fff;
+  color: #382013;
+  font: inherit;
+  font-size: 14px;
+  padding: 0 16px;
+  outline: none;
+}
+
+.mypets-field input,
+.mypets-field select {
+  height: 52px;
+}
+
+.mypets-field textarea {
+  padding: 14px 16px;
+  min-height: 105px;
+  resize: vertical;
+}
+
+.mypets-field input::placeholder,
+.mypets-field textarea::placeholder {
+  color: #cbb9b9;
+}
+
+.mypets-field input:focus,
+.mypets-field select:focus,
+.mypets-field textarea:focus {
+  border-color: #5bb5b0;
+  box-shadow: 0 0 0 3px rgba(91, 181, 176, 0.12);
+}
+
+.mypets-form-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+}
+
+.mypets-submit-btn {
+  background: #e9897f;
+  border: none;
+  color: white;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 900;
+  border-radius: 28px;
+  padding: 15px 20px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.mypets-submit-btn:hover {
+  background: #dc786e;
+}
+
+.mypets-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.mypets-message {
+  background: #fff3ee;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  margin-top: 18px;
+}
+
+/* PET PROFILES */
+
+.mypets-profiles {
+  min-width: 0;
+}
+
+.mypets-profiles-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+
+.mypets-count {
+  flex-shrink: 0;
+  background: #fbe0d9;
+  border-radius: 24px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.mypets-pet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mypets-pet-card {
+  background: white;
+  border: 1px solid #ffd1d9;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 3px 6px rgba(75, 42, 27, 0.06);
+}
+
+.mypets-pet-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mypets-avatar {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  background: #f9dce1;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 23px;
+  font-weight: 900;
+  color: #382013;
+}
+
+.mypets-pet-card:nth-child(even) .mypets-avatar {
+  background: #d5eeeb;
+}
+
+.mypets-pet-info h3 {
+  font-size: 24px;
+  font-weight: 900;
+  margin: 0 0 3px;
+  color: #382013;
+}
+
+.mypets-pet-info p {
+  font-size: 14px;
+  font-weight: 700;
+  color: #309f9c;
+  margin: 0;
+}
+
+.mypets-pet-divider {
+  height: 1px;
+  background: #f1e5cc;
+  margin: 18px 0 16px 72px;
+}
+
+.mypets-pet-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-left: 72px;
+}
+
+.mypets-pet-details span {
+  display: block;
+  color: #bb9990;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.mypets-pet-details p {
+  color: #382013;
+  font-size: 14px;
+  margin: 0;
+}
+
+.mypets-pet-notes {
+  background: #fff7e6;
+  border-radius: 13px;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #7c4e36;
+  margin: 18px 0 0 72px;
+}
+
+.mypets-empty {
+  background: white;
+  border: 1px solid #ffd1d9;
+  border-radius: 24px;
+  padding: 55px 25px;
+  text-align: center;
+}
+
+.mypets-empty-icon {
+  font-size: 35px;
+  margin-bottom: 12px;
+}
+
+.mypets-empty h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.mypets-empty p {
+  color: #81695b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+  .mypets-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .mypets-add-card {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  .mypets-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .mypets-content {
+    padding: 35px 18px 55px;
+  }
+
+  .mypets-hero {
+    min-height: 215px;
+  }
+}
+
+@media (max-width: 450px) {
+  .mypets-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .mypets-add-card {
+    padding: 22px;
+  }
+
+  .mypets-pet-card {
+    padding: 19px;
+  }
+
+  .mypets-pet-divider {
+    margin-left: 0;
+  }
+
+  .mypets-pet-details {
+    padding-left: 0;
+  }
+
+  .mypets-pet-notes {
+    margin-left: 0;
+  }
+}

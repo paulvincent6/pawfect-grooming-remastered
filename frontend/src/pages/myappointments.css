@@ -1,0 +1,487 @@
+
+/* =========================================
+   MY APPOINTMENTS PAGE
+========================================= */
+
+.myappointments-page {
+  min-height: 100vh;
+  background: #fff7e6;
+  color: #382013;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+}
+
+/* HERO */
+
+.myappointments-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 255px;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background: #5bb5b0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.myappointments-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.myappointments-eyebrow {
+  display: block;
+  color: #e8fff5;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.myappointments-hero h1 {
+  color: white;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 10px 0;
+}
+
+.myappointments-hero p {
+  color: white;
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.myappointments-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.myappointments-circle-left {
+  width: 175px;
+  height: 175px;
+  bottom: -85px;
+  left: -65px;
+}
+
+.myappointments-circle-right {
+  width: 175px;
+  height: 175px;
+  top: -45px;
+  right: -30px;
+}
+
+/* CONTENT */
+
+.myappointments-content {
+  padding: 55px 20px 85px;
+}
+
+.myappointments-container {
+  max-width: 975px;
+  margin: 0 auto;
+}
+
+/* SUMMARY CARD */
+
+.myappointments-summary {
+  background: white;
+  border: 1px solid #ffd1d9;
+  border-radius: 24px;
+  padding: 20px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 3px 7px rgba(75, 42, 27, 0.05);
+}
+
+.myappointments-stats {
+  display: flex;
+  align-items: center;
+}
+
+.myappointments-stat {
+  min-width: 125px;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.myappointments-stat:first-child {
+  padding-left: 0;
+  border-right: 1px solid #f2e5cf;
+}
+
+.myappointments-stat strong {
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.myappointments-upcoming-number {
+  color: #4aa8a3;
+}
+
+.myappointments-total-number {
+  color: #e9897f;
+}
+
+.myappointments-stat span {
+  font-size: 12px;
+  font-weight: 800;
+  color: #bb9990;
+}
+
+.myappointments-book-btn {
+  display: inline-block;
+  text-decoration: none;
+  background: #e9897f;
+  color: white;
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 30px;
+  padding: 14px 24px;
+  white-space: nowrap;
+}
+
+.myappointments-book-btn:hover {
+  background: #dc786e;
+  color: white;
+}
+
+/* APPOINTMENT CARDS */
+
+.myappointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.myappointments-card {
+  background: white;
+  border: 1px solid #ffd1d9;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 3px 7px rgba(75, 42, 27, 0.05);
+}
+
+.myappointments-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid #f2e5cf;
+}
+
+.myappointments-pet {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.myappointments-avatar {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: #d5eeeb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #382013;
+  font-size: 23px;
+  font-weight: 900;
+}
+
+.myappointments-card:nth-child(even) .myappointments-avatar {
+  background: #f9dce1;
+}
+
+.myappointments-service-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  color: #309f9c;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.myappointments-pet-info h2 {
+  margin: 0 0 4px;
+  font-size: 29px;
+  font-weight: 900;
+  color: #382013;
+}
+
+.myappointments-pet-info p {
+  margin: 0;
+  color: #a87e70;
+  font-size: 14px;
+}
+
+/* STATUS BADGES */
+
+.myappointments-status {
+  flex-shrink: 0;
+  padding: 9px 18px;
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #f1ece5;
+  color: #806d5d;
+}
+
+.myappointments-status-pending {
+  background: #fff0d8;
+  color: #a67930;
+}
+
+.myappointments-status-confirmed,
+.myappointments-status-upcoming {
+  background: #e5f5f3;
+  color: #309f9c;
+}
+
+.myappointments-status-completed {
+  background: #fbe6eb;
+  color: #e27d78;
+}
+
+.myappointments-status-cancelled,
+.myappointments-status-canceled {
+  background: #f5e5e5;
+  color: #ae5555;
+}
+
+/* DATE, TIME, AMOUNT */
+
+.myappointments-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid #f2e5cf;
+}
+
+.myappointments-details span {
+  display: block;
+  color: #bb9990;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.myappointments-details strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
+  color: #382013;
+}
+
+/* NOTES */
+
+.myappointments-notes {
+  background: #fff7e6;
+  border-radius: 13px;
+  padding: 15px 17px;
+  margin-top: 20px;
+  color: #7c4e36;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.myappointments-notes strong {
+  color: #382013;
+}
+
+/* REVIEW */
+
+.myappointments-review-area {
+  margin-top: 20px;
+}
+
+.myappointments-review-toggle {
+  border: 2px solid #ffb7c5;
+  border-radius: 25px;
+  background: white;
+  color: #382013;
+  padding: 11px 20px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.myappointments-review-toggle:hover {
+  background: #fff1f3;
+}
+
+.myappointments-review-form {
+  margin-top: 22px;
+  padding: 24px;
+  background: #fffaf3;
+  border: 1px solid #f6e4d8;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.myappointments-review-form h3 {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0 0 8px;
+}
+
+.myappointments-review-form label {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.myappointments-review-form select,
+.myappointments-review-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ffc5cf;
+  border-radius: 12px;
+  background: white;
+  color: #382013;
+  padding: 12px 15px;
+  font: inherit;
+  font-size: 14px;
+}
+
+.myappointments-review-form textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.myappointments-review-form select:focus,
+.myappointments-review-form textarea:focus {
+  outline: none;
+  border-color: #5bb5b0;
+}
+
+.myappointments-review-submit {
+  border: none;
+  background: #e9897f;
+  color: white;
+  border-radius: 25px;
+  padding: 13px 24px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.myappointments-review-submit:hover {
+  background: #dc786e;
+}
+
+/* EMPTY AND LOADING STATES */
+
+.myappointments-message,
+.myappointments-empty {
+  background: white;
+  border: 1px solid #ffd1d9;
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.myappointments-empty {
+  text-align: center;
+  padding: 55px 25px;
+}
+
+.myappointments-empty h2 {
+  margin: 0 0 10px;
+  font-size: 25px;
+}
+
+.myappointments-empty p {
+  color: #81695b;
+  margin-bottom: 24px;
+}
+
+.myappointments-empty a {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 25px;
+  background: #e9897f;
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+  .myappointments-hero {
+    min-height: 220px;
+  }
+
+  .myappointments-content {
+    padding: 35px 16px 55px;
+  }
+
+  .myappointments-summary {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .myappointments-stats {
+    justify-content: center;
+  }
+
+  .myappointments-stat {
+    flex: 1;
+    min-width: 0;
+    padding: 0 20px;
+  }
+
+  .myappointments-book-btn {
+    text-align: center;
+  }
+
+  .myappointments-card {
+    padding: 22px;
+  }
+
+  .myappointments-card-header {
+    flex-wrap: wrap;
+  }
+
+  .myappointments-pet-info h2 {
+    font-size: 24px;
+  }
+
+  .myappointments-details {
+    gap: 12px;
+  }
+
+  .myappointments-details strong {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 400px) {
+  .myappointments-details {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .myappointments-review-form {
+    padding: 16px;
+  }
+}

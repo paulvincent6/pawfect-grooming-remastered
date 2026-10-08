@@ -1,4 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import "./adminSidebar.css";
 
 function AdminSidebar() {
   const navigate = useNavigate();
@@ -6,44 +8,93 @@ function AdminSidebar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-
     navigate("/login");
   };
 
   return (
-    <aside>
-      <h2>🐾 Pawfect</h2>
-      <p>Admin Dashboard</p>
+    <aside className="admin-sidebar">
+      {/* BRAND */}
+      <div className="admin-sidebar-brand">
+        <div className="admin-sidebar-brand-row">
+          <div className="admin-sidebar-logo">🐾</div>
+          <h2>Pawfect</h2>
+        </div>
 
-      <hr />
+        <p>Admin Dashboard</p>
+      </div>
 
-      <nav>
-        <p>
-          📊 <Link to="/admin">Overview</Link>
-        </p>
+      {/* NAVIGATION */}
+      <nav className="admin-sidebar-nav">
+        <NavLink
+          to="/admin"
+          end
+          className={({ isActive }) =>
+            `admin-sidebar-link ${
+              isActive ? "admin-sidebar-active" : ""
+            }`
+          }
+        >
+          <span className="admin-sidebar-link-icon">📊</span>
+          <span className="admin-sidebar-link-text">Overview</span>
+        </NavLink>
 
-        <p>
-          📅 <Link to="/admin/appointments">Appointments</Link>
-        </p>
+        <NavLink
+          to="/admin/appointments"
+          className={({ isActive }) =>
+            `admin-sidebar-link ${
+              isActive ? "admin-sidebar-active" : ""
+            }`
+          }
+        >
+          <span className="admin-sidebar-link-icon">🗓️</span>
+          <span className="admin-sidebar-link-text">Appointments</span>
+        </NavLink>
 
-        <p>
-          ⭐ <Link to="/admin/reviews">Reviews</Link>
-        </p>
+        <NavLink
+          to="/admin/reviews"
+          className={({ isActive }) =>
+            `admin-sidebar-link ${
+              isActive ? "admin-sidebar-active" : ""
+            }`
+          }
+        >
+          <span className="admin-sidebar-link-icon">⭐</span>
+          <span className="admin-sidebar-link-text">Reviews</span>
+        </NavLink>
 
-        <p>
-          ⚙️ <Link to="/admin/settings">Settings</Link>
-        </p>
+        <NavLink
+          to="/admin/settings"
+          className={({ isActive }) =>
+            `admin-sidebar-link ${
+              isActive ? "admin-sidebar-active" : ""
+            }`
+          }
+        >
+          <span className="admin-sidebar-link-icon">⚙️</span>
+          <span className="admin-sidebar-link-text">Settings</span>
+        </NavLink>
       </nav>
 
-      <hr />
+      {/* BOTTOM LINKS */}
+      <div className="admin-sidebar-bottom">
+        <Link to="/" className="admin-sidebar-back">
+          <span>←</span>
+          <span className="admin-sidebar-link-text">
+            Back to Website
+          </span>
+        </Link>
 
-      <p>
-        <Link to="/">← Back to Website</Link>
-      </p>
-
-      <button onClick={handleLogout}>
-        Logout
-      </button>
+        <button
+          type="button"
+          className="admin-sidebar-logout"
+          onClick={handleLogout}
+        >
+          <span>↪</span>
+          <span className="admin-sidebar-link-text">
+            Logout
+          </span>
+        </button>
+      </div>
     </aside>
   );
 }

@@ -1,0 +1,215 @@
+
+/* =====================================
+   PAWFECT GROOMING - NAVBAR
+===================================== */
+
+.site-header {
+  width: 100%;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+}
+
+.site-promo {
+  background: #e9897f;
+  color: white;
+  text-align: center;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.site-promo strong {
+  text-decoration: underline;
+  margin-left: 4px;
+}
+
+.site-navbar {
+  background: #fff7e6;
+  border-bottom: 1px solid #f2e7d6;
+}
+
+.site-navbar-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 13px 22px;
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: #382013;
+  flex-shrink: 0;
+}
+
+.site-brand-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #5bb5b0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.site-brand-name {
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.site-nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: 30px;
+  margin-left: 70px;
+}
+
+.site-nav-links,
+.site-nav-account {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.site-nav-links a,
+.site-nav-account a {
+  text-decoration: none;
+  color: #382013;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.site-nav-links a:hover,
+.site-nav-account a:hover {
+  color: #4caaa6;
+}
+
+.site-nav-links .site-book-btn {
+  background: #e9897f;
+  color: white;
+  padding: 11px 23px;
+  border-radius: 24px;
+  font-weight: 800;
+}
+
+.site-nav-links .site-book-btn:hover {
+  background: #dc786e;
+  color: white;
+}
+
+.site-nav-account .site-login-btn {
+  background: #55b5b0;
+  color: white;
+  padding: 10px 19px;
+  border-radius: 24px;
+  font-weight: 800;
+}
+
+.site-nav-account .site-login-btn:hover {
+  background: #429e99;
+  color: white;
+}
+
+.site-nav-account .site-admin-btn {
+  border: 1px solid #ffb7b7;
+  padding: 9px 18px;
+  border-radius: 24px;
+}
+
+.site-welcome {
+  color: #785b4b;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.site-logout-btn {
+  border: 1px solid #e9897f;
+  border-radius: 24px;
+  padding: 9px 18px;
+  background: transparent;
+  color: #382013;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.site-logout-btn:hover {
+  background: #fff0eb;
+}
+
+.site-menu-toggle {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 27px;
+  cursor: pointer;
+  color: #382013;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+  .site-nav-content {
+    margin-left: 15px;
+    gap: 15px;
+  }
+
+  .site-nav-links,
+  .site-nav-account {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 850px) {
+  .site-navbar-inner {
+    flex-wrap: wrap;
+  }
+
+  .site-menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .site-nav-content {
+    display: none;
+    flex-basis: 100%;
+    margin-left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px 0;
+    gap: 22px;
+  }
+
+  .site-nav-content.site-nav-open {
+    display: flex;
+  }
+
+  .site-nav-links,
+  .site-nav-account {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .site-welcome {
+    white-space: normal;
+  }
+
+  .site-nav-links .site-book-btn,
+  .site-nav-account .site-login-btn,
+  .site-nav-account .site-admin-btn,
+  .site-logout-btn {
+    text-align: center;
+  }
+}

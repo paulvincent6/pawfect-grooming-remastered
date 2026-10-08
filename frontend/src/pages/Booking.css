@@ -1,0 +1,148 @@
+
+/* =========================================
+   PAWFECT GROOMING - BOOKING PAGE
+========================================= */
+
+.booking-page {
+  min-height: 100vh;
+  background: #fff7e6;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+  color: #382013;
+}
+
+/* TEAL HEADER */
+
+.booking-hero {
+  background: #5bb5b0;
+  color: white;
+  text-align: center;
+  padding: 52px 20px 54px;
+}
+
+.booking-hero h1 {
+  margin: 0 0 10px;
+  color: white;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.booking-hero p {
+  margin: 0;
+  color: white;
+  font-size: 16px;
+}
+
+/* FORM AREA */
+
+.booking-content {
+  padding: 52px 20px 75px;
+  display: flex;
+  justify-content: center;
+  background: #fff7e6;
+}
+
+.booking-form-container {
+  width: 100%;
+  max-width: 465px;
+}
+
+.booking-form-container h2 {
+  margin: 0 0 28px;
+  font-size: 25px;
+  font-weight: 900;
+  color: #382013;
+}
+
+.booking-form > div {
+  margin-bottom: 19px;
+}
+
+.booking-form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #382013;
+}
+
+.booking-form select,
+.booking-form input,
+.booking-form textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ffb7b7;
+  border-radius: 12px;
+  background: #fff;
+  color: #382013;
+  font: inherit;
+  font-size: 14px;
+  padding: 0 16px;
+  outline: none;
+}
+
+.booking-form select,
+.booking-form input {
+  height: 47px;
+}
+
+.booking-form textarea {
+  min-height: 105px;
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+.booking-form select:focus,
+.booking-form input:focus,
+.booking-form textarea:focus {
+  border-color: #50aaa5;
+  box-shadow: 0 0 0 3px rgba(80, 170, 165, 0.13);
+}
+
+.booking-form button[type="submit"] {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  border: none;
+  border-radius: 28px;
+  background: #e9897f;
+  color: white;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.booking-form button[type="submit"]:hover {
+  background: #dc786e;
+}
+
+.booking-form-container > p {
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.booking-notice {
+  padding: 12px 15px;
+  border-radius: 10px;
+  background: #fff0ed;
+  color: #9b493f;
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+  .booking-hero {
+    padding: 42px 20px;
+  }
+
+  .booking-content {
+    padding: 35px 20px 55px;
+  }
+
+  .booking-form-container h2 {
+    font-size: 23px;
+  }
+}

@@ -1,0 +1,203 @@
+
+/* =========================================
+   ADMIN SETTINGS - FIGMA DESIGN
+========================================= */
+
+.admin-settings-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f7f3ef;
+  color: #382013;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+}
+
+.admin-settings-layout * {
+  box-sizing: border-box;
+}
+
+.admin-settings-main {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  background: #f7f3ef;
+}
+
+/* HEADER */
+
+.admin-settings-header {
+  min-height: 85px;
+  padding: 15px 32px;
+  background: #fff;
+  border-bottom: 1px solid #eee7e1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.admin-settings-header h1 {
+  margin: 0 0 3px;
+  color: #382013;
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.admin-settings-header p {
+  margin: 0;
+  color: #996a58;
+  font-size: 13px;
+}
+
+.admin-settings-admin {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.admin-settings-admin-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f3b8c5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+/* CONTENT */
+
+.admin-settings-content {
+  padding: 32px;
+}
+
+.admin-settings-cards {
+  width: 100%;
+  max-width: 578px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* CARDS */
+
+.admin-settings-card {
+  background: #fff;
+  border: 1px solid #eeeeee;
+  border-radius: 18px;
+  padding: 26px 24px;
+  box-shadow: 0 2px 3px rgba(56, 32, 19, 0.08);
+}
+
+.admin-settings-card h2 {
+  margin: 0 0 20px;
+  color: #382013;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+/* BUSINESS HOURS */
+
+.admin-settings-hours-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f2f2f2;
+  color: #382013;
+  font-size: 13px;
+}
+
+.admin-settings-hours-row:last-child {
+  border-bottom: none;
+  padding-bottom: 4px;
+}
+
+.admin-settings-hours-row span:last-child {
+  color: #996a58;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* CONTACT INFORMATION */
+
+.admin-settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.admin-settings-field:last-child {
+  margin-bottom: 0;
+}
+
+.admin-settings-field label {
+  color: #714838;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-settings-field input {
+  width: 100%;
+  height: 43px;
+  padding: 0 15px;
+  border: 1px solid #dce2e7;
+  border-radius: 12px;
+  background: #fff;
+  color: #382013;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.admin-settings-field input[readonly] {
+  cursor: default;
+}
+
+/* LOADING / ERROR */
+
+.admin-settings-notice {
+  max-width: 578px;
+  margin: 0 0 16px;
+  padding: 15px 18px;
+  background: #fff;
+  border: 1px solid #eee7e1;
+  border-radius: 12px;
+  color: #996a58;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .admin-settings-header {
+    padding: 18px;
+  }
+
+  .admin-settings-header h1 {
+    font-size: 23px;
+  }
+
+  .admin-settings-content {
+    padding: 20px 15px;
+  }
+
+  .admin-settings-card {
+    padding: 22px 18px;
+  }
+}
+
+@media (max-width: 430px) {
+  .admin-settings-hours-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .admin-settings-hours-row span:last-child {
+    text-align: left;
+  }
+}

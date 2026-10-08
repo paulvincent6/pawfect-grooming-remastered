@@ -1,59 +1,153 @@
-import { Link, useNavigate } from "react-router-dom";
+
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import "./navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Get logged-in user from localStorage
-  const storedUser = localStorage.getItem("user");
-  const user = storedUser ? JSON.parse(storedUser) : null;
+  let user = null;
+
+  try {
+    const storedUser = localStorage.getItem("user");
+    user = storedUser ? JSON.parse(storedUser) : null;
+  } catch {
+    user = null;
+  }
+
+  const isAdmin = user?.role === "admin";
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-
+    setMenuOpen(false);
     navigate("/login");
   };
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <nav>
-      <h2>Pawfect Grooming</h2>
-
-      <div>
-        <Link to="/">Home</Link>
-
-        {/* If user is logged in */}
-        {user ? (
-          <>
-            {" | "}
-            <Link to="/pets">My Pets</Link>
-          
-            {" | "}
-            <Link to="/booking">Book Appointment</Link>
-
-            {" | "}
-            <Link to="/appointments">My Appointments</Link>
-
-            
-
-            {" | "}
-            <span>Welcome, {user.full_name}</span>
-
-            {" | "}
-            <button onClick={handleLogout}>
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            {" | "}
-            <Link to="/login">Login</Link>
-
-            {" | "}
-            <Link to="/register">Register</Link>
-          </>
-        )}
+    <header className="site-header">
+      {/* PROMOTIONAL BANNER */}
+      <div className="site-promo">
+        🎉 Get 10% off your first appointment!
+        Use code <strong>PAWFIRST</strong>
       </div>
-    </nav>
+
+      {/* NAVIGATION */}
+      <nav className="site-navbar">
+        <div className="site-navbar-inner">
+          <Link
+            to="/"
+            className="site-brand"
+            onClick={closeMenu}
+          >
+            <span className="site-brand-icon">🐾</span>
+            <span className="site-brand-name">
+              Pawfect
+              <br />
+              Grooming
+            </span>
+          </Link>
+
+          <button
+            type="button"
+            className="site-menu-toggle"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+          >
+            ☰
+          </button>
+
+          <div
+            className={
+              menuOpen
+                ? "site-nav-content site-nav-open"
+                : "site-nav-content"
+            }
+          >
+            {/* MAIN LINKS */}
+            <div className="site-nav-links">
+              <NavLink to="/" onClick={closeMenu}>
+                Home
+              </NavLink>
+
+              {user && !isAdmin && (
+                <>
+                  <NavLink to="/pets" onClick={closeMenu}>
+                    My Pets
+                  </NavLink>
+
+                  <NavLink
+                    to="/appointments"
+                    onClick={closeMenu}
+                  >
+                    My Appointments
+                  </NavLink>
+                </>
+              )}
+
+              <Link
+                to="/booking"
+                className="site-book-btn"
+                onClick={closeMenu}
+              >
+                Book Now
+              </Link>
+            </div>
+
+            {/* ACCOUNT LINKS */}
+            <div className="site-nav-account">
+              {user ? (
+                <>
+                  <span className="site-welcome">
+                    Welcome, {user.full_name || user.name || "Pet Parent"}
+                  </span>
+
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      className="site-admin-btn"
+                      onClick={closeMenu}
+                    >
+                      Admin
+                    </Link>
+                  )}
+
+                  <button
+                    type="button"
+                    className="site-logout-btn"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/register"
+                    onClick={closeMenu}
+                    className="site-register-link"
+                  >
+                    Register
+                  </Link>
+
+                  <Link
+                    to="/login"
+                    onClick={closeMenu}
+                    className="site-login-btn"
+                  >
+                    Login
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 }
 

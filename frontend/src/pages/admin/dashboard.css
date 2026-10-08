@@ -1,0 +1,338 @@
+
+/* =========================================
+   ADMIN OVERVIEW - FIGMA DESIGN
+========================================= */
+
+.admin-dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f7f3ef;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+  color: #382013;
+}
+
+.admin-dashboard-layout * {
+  box-sizing: border-box;
+}
+
+.admin-dashboard-main {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  background: #f7f3ef;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.admin-dashboard-header {
+  min-height: 87px;
+  padding: 16px 32px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #eee7e1;
+}
+
+.admin-dashboard-header-left h1 {
+  margin: 0 0 3px;
+  color: #382013;
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.admin-dashboard-header-left p {
+  margin: 0;
+  font-size: 13px;
+  color: #996a58;
+}
+
+.admin-dashboard-admin {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #382013;
+}
+
+.admin-dashboard-admin-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3b8c5;
+  color: #382013;
+  font-weight: 800;
+}
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.admin-dashboard-content {
+  padding: 32px;
+}
+
+/* =========================================
+   SUMMARY CARDS
+========================================= */
+
+.admin-dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.admin-dashboard-stat-card {
+  min-height: 145px;
+  background: white;
+  border: 1px solid #eeeeee;
+  border-radius: 17px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 2px 3px rgba(56, 32, 19, 0.08);
+}
+
+.admin-dashboard-stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  margin-bottom: 13px;
+}
+
+.admin-dashboard-icon-teal {
+  background: #edf7f5;
+}
+
+.admin-dashboard-icon-blue {
+  background: #edf4ff;
+}
+
+.admin-dashboard-icon-green {
+  background: #edfbf2;
+}
+
+.admin-dashboard-icon-yellow {
+  background: #fffbe8;
+}
+
+.admin-dashboard-stat-value {
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 900;
+  color: #382013;
+  margin-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+.admin-dashboard-stat-label {
+  font-size: 12px;
+  color: #995f4b;
+}
+
+/* =========================================
+   TODAY'S SCHEDULE
+========================================= */
+
+.admin-dashboard-schedule {
+  background: white;
+  border: 1px solid #eeeeee;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 3px rgba(56, 32, 19, 0.07);
+}
+
+.admin-dashboard-schedule > h2 {
+  margin: 0;
+  padding: 25px 25px 24px;
+  font-size: 20px;
+  font-weight: 900;
+  color: #382013;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.admin-dashboard-schedule-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-dashboard-schedule-row {
+  min-height: 70px;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.admin-dashboard-schedule-row:last-child {
+  border-bottom: none;
+}
+
+.admin-dashboard-schedule-pet {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+}
+
+.admin-dashboard-pet-icon {
+  font-size: 28px;
+  width: 34px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.admin-dashboard-pet-details p {
+  margin: 0 0 5px;
+  font-size: 14px;
+  color: #382013;
+}
+
+.admin-dashboard-pet-details p strong {
+  font-weight: 800;
+}
+
+.admin-dashboard-pet-details p span {
+  color: #996a58;
+}
+
+.admin-dashboard-pet-details small {
+  display: block;
+  color: #996a58;
+  font-size: 12px;
+}
+
+.admin-dashboard-schedule-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.admin-dashboard-time {
+  font-size: 13px;
+  color: #382013;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* =========================================
+   STATUS LABELS
+========================================= */
+
+.admin-dashboard-status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #f1ece5;
+  color: #806d5d;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.admin-dashboard-status-pending {
+  background: #fff4d5;
+  color: #a67930;
+}
+
+.admin-dashboard-status-confirmed {
+  background: #deedff;
+  color: #386ce0;
+}
+
+.admin-dashboard-status-completed {
+  background: #e5f5e5;
+  color: #4d9453;
+}
+
+.admin-dashboard-status-cancelled {
+  background: #ffe5e5;
+  color: #cb5c5c;
+}
+
+/* =========================================
+   MESSAGES
+========================================= */
+
+.admin-dashboard-message {
+  background: #ffe5e5;
+  color: #a33d3d;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 22px;
+}
+
+.admin-dashboard-empty {
+  margin: 0;
+  padding: 35px 25px;
+  font-size: 14px;
+  color: #996a58;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+  .admin-dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-dashboard-header {
+    padding: 18px;
+  }
+
+  .admin-dashboard-header-left h1 {
+    font-size: 23px;
+  }
+
+  .admin-dashboard-content {
+    padding: 18px;
+  }
+
+  .admin-dashboard-stats {
+    gap: 12px;
+  }
+
+  .admin-dashboard-stat-card {
+    padding: 15px;
+  }
+
+  .admin-dashboard-schedule-row {
+    padding: 15px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .admin-dashboard-schedule-right {
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 49px;
+  }
+}
+
+@media (max-width: 430px) {
+  .admin-dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+}

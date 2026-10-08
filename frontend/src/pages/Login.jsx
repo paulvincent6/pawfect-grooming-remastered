@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ function Login() {
   });
 
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -20,6 +22,8 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage("");
+    setLoading(true);
 
     try {
       const response = await fetch(
@@ -36,7 +40,7 @@ function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        setMessage(data.message);
+        setMessage(data.message || "Login failed.");
         return;
       }
 
@@ -44,60 +48,110 @@ function Login() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      setMessage(data.message);
-
       // Redirect depending on role
       if (data.user.role === "admin") {
         navigate("/admin");
       } else {
         navigate("/");
       }
-
     } catch (error) {
       setMessage("Unable to connect to the server.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <main>
-      <h1>Login</h1>
+    <main className="login-page">
+      {/* LEFT WELCOME PANEL */}
+      <section className="login-welcome">
+        <Link to="/" className="login-brand">
+          <span className="login-brand-icon">🐾</span>
+          <span>Pawfect Grooming</span>
+        </Link>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
-          <br />
+        <div className="login-welcome-content">
+          <div className="login-pet-icon">🐱</div>
 
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-          />
+          <h1>Welcome back, pet parent!</h1>
+
+          <p>
+            Sign in to manage your appointments, view your
+            booking history, and keep your furry friends
+            looking their best.
+          </p>
         </div>
 
-        <div>
-          <label>Password</label>
-          <br />
-
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-          />
+        <div className="login-welcome-footer">
+          
         </div>
+      </section>
 
-        <button type="submit">Login</button>
-      </form>
+      {/* RIGHT LOGIN PANEL */}
+      <section className="login-right">
+        <div className="login-form-container">
+          <h2>Sign In</h2>
 
-      {message && <p>{message}</p>}
+          <p className="login-register-text">
+            Don't have an account?{" "}
+            <Link to="/register">Create one free</Link>
+          </p>
 
-      <p>
-        Don't have an account?{" "}
-        <Link to="/register">Register</Link>
-      </p>
+          <form onSubmit={handleSubmit}>
+            <div className="login-field">
+              <label htmlFor="login-email">
+                Email Address
+              </label>
+
+              <input
+                id="login-email"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="you@example.com"
+                autoComplete="email"
+                required
+              />
+            </div>
+
+            <div className="login-field">
+              <label htmlFor="login-password">
+                Password
+              </label>
+
+              <input
+                id="login-password"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                autoComplete="current-password"
+                required
+              />
+            </div>
+
+            {message && (
+              <p className="login-error" role="alert">
+                {message}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="login-submit"
+              disabled={loading}
+            >
+              {loading ? "Signing In..." : "Sign In"}
+            </button>
+          </form>
+
+          <Link to="/" className="login-back">
+            ← Back to website
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }

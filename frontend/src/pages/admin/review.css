@@ -1,0 +1,245 @@
+
+/* =========================================
+   ADMIN REVIEWS - FIGMA DESIGN
+========================================= */
+
+.admin-reviews-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f7f3ef;
+  color: #382013;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+}
+
+.admin-reviews-layout * {
+  box-sizing: border-box;
+}
+
+.admin-reviews-main {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  background: #f7f3ef;
+}
+
+/* HEADER */
+
+.admin-reviews-header {
+  min-height: 80px;
+  padding: 14px 32px;
+  background: #fff;
+  border-bottom: 1px solid #eee7e1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.admin-reviews-header h1 {
+  margin: 0 0 3px;
+  font-size: 27px;
+  font-weight: 900;
+  color: #382013;
+}
+
+.admin-reviews-header p {
+  margin: 0;
+  color: #996a58;
+  font-size: 13px;
+}
+
+.admin-reviews-admin {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.admin-reviews-admin-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f3b8c5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+/* CONTENT */
+
+.admin-reviews-content {
+  padding: 32px;
+}
+
+/* STATISTICS */
+
+.admin-reviews-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.admin-reviews-stat-card {
+  min-height: 136px;
+  background: #fff;
+  border: 1px solid #e9e9e9;
+  border-radius: 18px;
+  box-shadow: 0 2px 3px rgba(56, 32, 19, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.admin-reviews-stat-icon {
+  font-size: 32px;
+  line-height: 1;
+  margin-bottom: 11px;
+}
+
+.admin-reviews-stat-card strong {
+  color: #382013;
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.admin-reviews-stat-card small {
+  margin-top: 4px;
+  color: #996a58;
+  font-size: 12px;
+}
+
+/* REVIEW LIST */
+
+.admin-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-reviews-card {
+  background: #fff;
+  border: 1px solid #eeeeee;
+  border-radius: 18px;
+  padding: 24px 25px;
+  box-shadow: 0 2px 3px rgba(56, 32, 19, 0.08);
+}
+
+.admin-reviews-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.admin-reviews-customer {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+}
+
+.admin-reviews-customer-avatar {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background: #f3b8c5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #382013;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.admin-reviews-customer h2 {
+  margin: 0 0 5px;
+  color: #382013;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.admin-reviews-customer p {
+  margin: 0;
+  color: #996a58;
+  font-size: 12px;
+}
+
+.admin-reviews-stars {
+  color: #ffb900;
+  font-size: 17px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.admin-reviews-comment {
+  margin: 14px 0 0;
+  color: #995f4b;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* MESSAGES */
+
+.admin-reviews-message {
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  background: #fff;
+  border: 1px solid #ffd1d9;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.admin-reviews-empty {
+  margin: 0;
+  padding: 35px 25px;
+  background: white;
+  border-radius: 18px;
+  color: #996a58;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .admin-reviews-content {
+    padding: 24px 20px;
+  }
+
+  .admin-reviews-header {
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 650px) {
+  .admin-reviews-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-reviews-content {
+    padding: 18px 12px;
+  }
+
+  .admin-reviews-card {
+    padding: 20px 16px;
+  }
+
+  .admin-reviews-card-top {
+    align-items: flex-start;
+  }
+
+  .admin-reviews-stars {
+    font-size: 13px;
+  }
+
+  .admin-reviews-header h1 {
+    font-size: 23px;
+  }
+}

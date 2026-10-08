@@ -1,5 +1,7 @@
+
 import { useEffect, useState } from "react";
 import AdminSidebar from "../../components/AdminSidebar";
+import "./settings.css";
 
 function Settings() {
   const [settings, setSettings] = useState(null);
@@ -8,7 +10,7 @@ function Settings() {
 
   const token = localStorage.getItem("token");
 
-  // LOAD SETTINGS
+  // LOAD SETTINGS FROM DATABASE
   useEffect(() => {
     const loadSettings = async () => {
       try {
@@ -43,85 +45,142 @@ function Settings() {
   // FORMAT TIME
   // Example: 09:00:00 -> 9:00 AM
   const formatTime = (time) => {
-    if (!time) return "";
+    if (!time) return "Not set";
 
-    const [hour, minute] = time.split(":");
+    const [hours, minutes] = String(time).split(":");
+    const hour = Number(hours);
 
-    const date = new Date();
-    date.setHours(Number(hour));
-    date.setMinutes(Number(minute));
+    if (Number.isNaN(hour)) return String(time);
 
-    return date.toLocaleTimeString([], {
-      hour: "numeric",
-      minute: "2-digit",
-    });
+    return `${hour % 12 || 12}:${minutes || "00"} ${
+      hour >= 12 ? "PM" : "AM"
+    }`;
   };
 
   return (
-    <>
+    <div className="admin-settings-layout">
       <AdminSidebar />
 
-      <main>
-        <h1>⚙️ Settings</h1>
+      <main className="admin-settings-main">
+        {/* HEADER */}
+        <header className="admin-settings-header">
+          <div>
+            <h1>⚙️ Settings</h1>
 
-        <p>{new Date().toLocaleDateString()}</p>
+            <p>
+              {new Date().toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+          </div>
 
-        {loading && <p>Loading settings...</p>}
+          <div className="admin-settings-admin">
+            <span className="admin-settings-admin-avatar">
+              A
+            </span>
+            <span>Admin</span>
+          </div>
+        </header>
 
-        {message && <p>{message}</p>}
+        {/* CONTENT */}
+        <div className="admin-settings-content">
+          {loading && (
+            <p className="admin-settings-notice">
+              Loading settings...
+            </p>
+          )}
 
-        {!loading && settings && (
-          <>
-            <hr />
+          {message && (
+            <p className="admin-settings-notice" role="alert">
+              {message}
+            </p>
+          )}
 
-            {/* BUSINESS HOURS */}
-            <section>
-              <h2>Business Hours</h2>
+          {!loading && settings && (
+            <div className="admin-settings-cards">
+              {/* BUSINESS HOURS */}
+              <section className="admin-settings-card">
+                <h2>Business Hours</h2>
 
-              <p>
-                <strong>Monday – Friday:</strong>{" "}
-                {formatTime(settings.weekday_open)} –{" "}
-                {formatTime(settings.weekday_close)}
-              </p>
+                <div className="admin-settings-hours-row">
+                  <span>Monday – Friday</span>
+                  <span>
+                    {formatTime(settings.weekday_open)}
+                    {" – "}
+                    {formatTime(settings.weekday_close)}
+                  </span>
+                </div>
 
-              <p>
-                <strong>Saturday:</strong>{" "}
-                {formatTime(settings.saturday_open)} –{" "}
-                {formatTime(settings.saturday_close)}
-              </p>
+                <div className="admin-settings-hours-row">
+                  <span>Saturday</span>
+                  <span>
+                    {formatTime(settings.saturday_open)}
+                    {" – "}
+                    {formatTime(settings.saturday_close)}
+                  </span>
+                </div>
 
-              <p>
-                <strong>Sunday:</strong>{" "}
-                {formatTime(settings.sunday_open)} –{" "}
-                {formatTime(settings.sunday_close)}
-              </p>
-            </section>
+                <div className="admin-settings-hours-row">
+                  <span>Sunday</span>
+                  <span>
+                    {formatTime(settings.sunday_open)}
+                    {" – "}
+                    {formatTime(settings.sunday_close)}
+                  </span>
+                </div>
+              </section>
 
-            <hr />
+              {/* CONTACT INFORMATION */}
+              <section className="admin-settings-card">
+                <h2>Contact Information</h2>
 
-            {/* CONTACT INFORMATION */}
-            <section>
-              <h2>Contact Information</h2>
+                <div className="admin-settings-field">
+                  <label htmlFor="settings-phone">
+                    BUSINESS PHONE
+                  </label>
 
-              <p>
-                <strong>Business Phone:</strong>{" "}
-                {settings.business_phone}
-              </p>
+                  <input
+                    id="settings-phone"
+                    type="text"
+                    value={settings.business_phone || ""}
+                    readOnly
+                  />
+                </div>
 
-              <p>
-                <strong>Email:</strong>{" "}
-                {settings.email}
-              </p>
+                <div className="admin-settings-field">
+                  <label htmlFor="settings-email">
+                    EMAIL
+                  </label>
 
-              <p>
-                <strong>Address:</strong>{" "}
-                {settings.address}
-              </p>
-            </section>
-          </>
-        )}
+                  <input
+                    id="settings-email"
+                    type="text"
+                    value={settings.email || ""}
+                    readOnly
+                  />
+                </div>
+
+                <div className="admin-settings-field">
+                  <label htmlFor="settings-address">
+                    ADDRESS
+                  </label>
+
+                  <input
+                    id="settings-address"
+                    type="text"
+                    value={settings.address || ""}
+                    readOnly
+                  />
+                </div>
+              </section>
+            </div>
+          )}
+        </div>
       </main>
-    </>
+    </div>
   );
 }
 

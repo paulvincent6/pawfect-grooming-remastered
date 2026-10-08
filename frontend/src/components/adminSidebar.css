@@ -1,0 +1,195 @@
+
+/* ========================================
+   ADMIN SIDEBAR - FIGMA DESIGN
+======================================== */
+
+.admin-sidebar {
+  width: 243px;
+  min-width: 243px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  background: #3b281e;
+  color: #fff7e6;
+  font-family: "Nunito", "Segoe UI", sans-serif;
+  box-sizing: border-box;
+}
+
+.admin-sidebar * {
+  box-sizing: border-box;
+}
+
+/* BRAND */
+
+.admin-sidebar-brand {
+  padding: 17px 25px 23px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.admin-sidebar-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.admin-sidebar-logo {
+  width: 33px;
+  height: 33px;
+  min-width: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #5bb5b0;
+  border-radius: 50%;
+  font-size: 17px;
+}
+
+.admin-sidebar-brand h2 {
+  margin: 0;
+  color: #fff7e6;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.admin-sidebar-brand p {
+  margin: 4px 0 0;
+  color: #e9897f;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* NAVIGATION */
+
+.admin-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 16px 18px;
+}
+
+.admin-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 13px;
+  border-radius: 12px;
+  color: #e4d1c5;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.admin-sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.admin-sidebar-link.admin-sidebar-active {
+  background: #5bb5b0;
+  color: white;
+  font-weight: 800;
+}
+
+.admin-sidebar-link-icon {
+  width: 17px;
+  min-width: 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.admin-sidebar-link-text {
+  white-space: nowrap;
+}
+
+/* BOTTOM LINKS */
+
+.admin-sidebar-bottom {
+  margin-top: auto;
+  padding: 16px 18px 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.admin-sidebar-back,
+.admin-sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 13px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: #e4d1c5;
+  font: inherit;
+  font-size: 13px;
+  text-decoration: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.admin-sidebar-back:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.admin-sidebar-logout {
+  color: #f19a91;
+}
+
+.admin-sidebar-logout:hover {
+  background: rgba(233, 137, 127, 0.12);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 750px) {
+  .admin-sidebar {
+    width: 70px;
+    min-width: 70px;
+  }
+
+  .admin-sidebar-brand {
+    padding: 17px 10px;
+  }
+
+  .admin-sidebar-brand-row {
+    justify-content: center;
+  }
+
+  .admin-sidebar-brand h2,
+  .admin-sidebar-brand p,
+  .admin-sidebar-link-text {
+    display: none;
+  }
+
+  .admin-sidebar-nav {
+    padding: 16px 8px;
+  }
+
+  .admin-sidebar-link {
+    justify-content: center;
+    padding: 11px 8px;
+  }
+
+  .admin-sidebar-bottom {
+    padding: 12px 8px;
+  }
+
+  .admin-sidebar-back,
+  .admin-sidebar-logout {
+    justify-content: center;
+    padding: 11px 8px;
+  }
+}
+    
