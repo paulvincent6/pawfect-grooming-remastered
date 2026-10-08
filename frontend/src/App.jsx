@@ -12,6 +12,8 @@ import Dashboard from "./pages/admin/Dashboard";
 import AdminAppointments from "./pages/admin/Appointments";
 import Reviews from "./pages/admin/Review";
 import Settings from "./pages/admin/Settings";
+import AdminRoute from "./components/AdminRoute";
+
 
 function App() {
   return (
@@ -26,13 +28,12 @@ function App() {
         <Route path="/appointments" element={<MyAppointments />} />
 
         {/* ADMIN */}
-        <Route path="/admin" element={<Dashboard />} />
-
-        <Route path="/admin/appointments" element={<AdminAppointments />} />
-
-        <Route path="/admin/reviews" element={<Reviews />} />
-
-        <Route path="/admin/settings" element={<Settings />} />
+        <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/appointments" element={<AdminAppointments />} />
+          <Route path="/admin/reviews" element={<Reviews />} />
+          <Route path="/admin/settings" element={<Settings />} />
+        </Route>
         
       </Routes>
     </BrowserRouter>
