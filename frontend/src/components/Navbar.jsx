@@ -29,11 +29,14 @@ function Navbar() {
 
   return (
     <header className="site-header">
-      {/* PROMOTIONAL BANNER */}
+      {/*  promotial (not working so lez leave it commented out first)
+      
       <div className="site-promo">
         🎉 Get 10% off your first appointment!
         Use code <strong>PAWFIRST</strong>
       </div>
+
+      */}
 
       {/* NAVIGATION */}
       <nav className="site-navbar">
