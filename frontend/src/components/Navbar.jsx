@@ -70,13 +70,36 @@ function Navbar() {
           >
             {/* MAIN LINKS */}
             <div className="site-nav-links">
-              <NavLink to="/" onClick={closeMenu}>
+              <NavLink
+                to="/"
+                end
+                onClick={closeMenu}
+              >
                 Home
               </NavLink>
 
+              {/* PUBLIC PAGES */}
+              <NavLink
+                to="/services"
+                onClick={closeMenu}
+              >
+                Services
+              </NavLink>
+
+              <NavLink
+                to="/contact"
+                onClick={closeMenu}
+              >
+                Contact Us
+              </NavLink>
+
+              {/* CUSTOMER PAGES */}
               {user && !isAdmin && (
                 <>
-                  <NavLink to="/pets" onClick={closeMenu}>
+                  <NavLink
+                    to="/pets"
+                    onClick={closeMenu}
+                  >
                     My Pets
                   </NavLink>
 
@@ -89,6 +112,7 @@ function Navbar() {
                 </>
               )}
 
+              {/* BOOKING */}
               <Link
                 to="/booking"
                 className="site-book-btn"
@@ -103,7 +127,10 @@ function Navbar() {
               {user ? (
                 <>
                   <span className="site-welcome">
-                    Welcome, {user.full_name || user.name || "Pet Parent"}
+                    Welcome,{" "}
+                    {user.full_name ||
+                      user.name ||
+                      "Pet Parent"}
                   </span>
 
                   {isAdmin && (

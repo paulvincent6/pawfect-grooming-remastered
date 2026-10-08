@@ -1,0 +1,153 @@
+
+.customer-services-page {
+  min-height: 80vh;
+  background: #fff7e6;
+  color: #3b281e;
+}
+
+.customer-services-hero {
+  background: #5bb8b5;
+  text-align: center;
+  padding: 65px 20px;
+}
+
+.customer-services-hero h1 {
+  color: white;
+  font-size: 46px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+
+.customer-services-hero p {
+  color: #fff;
+  font-size: 16px;
+  margin: 0;
+}
+
+.customer-services-content {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 65px 24px 90px;
+}
+
+.customer-services-heading {
+  margin-bottom: 35px;
+}
+
+.customer-services-heading h2 {
+  font-size: 29px;
+  margin: 0 0 10px;
+}
+
+.customer-services-heading p {
+  color: #826758;
+  font-size: 15px;
+  margin: 0;
+}
+
+.customer-services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.customer-service-card {
+  background: #fff;
+  border: 1px solid #f5d6d9;
+  border-radius: 17px;
+  padding: 25px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.customer-service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(59, 40, 30, 0.08);
+}
+
+.customer-service-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 17px;
+}
+
+.customer-service-icon {
+  font-size: 27px;
+}
+
+.customer-service-price {
+  color: #45aaa9;
+  font-weight: 700;
+  font-size: 19px;
+}
+
+.customer-service-card h3 {
+  font-size: 20px;
+  margin: 0 0 12px;
+  color: #3b281e;
+}
+
+.customer-service-description {
+  color: #806457;
+  line-height: 1.7;
+  min-height: 50px;
+  font-size: 14px;
+}
+
+.customer-service-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
+  padding-top: 17px;
+  border-top: 1px solid #f5e7df;
+}
+
+.customer-service-duration {
+  color: #826758;
+  font-size: 13px;
+}
+
+.customer-service-book {
+  background: #e9877c;
+  color: #fff;
+  padding: 10px 19px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.customer-service-book:hover {
+  background: #d87368;
+}
+
+.customer-services-message,
+.customer-services-error {
+  text-align: center;
+  padding: 45px 20px;
+}
+
+.customer-services-error {
+  color: #c0392b;
+}
+
+@media (max-width: 768px) {
+  .customer-services-hero h1 {
+    font-size: 34px;
+  }
+
+  .customer-services-content {
+    padding: 40px 16px 65px;
+  }
+
+  .customer-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .customer-service-bottom {
+    flex-wrap: wrap;
+  }
+}

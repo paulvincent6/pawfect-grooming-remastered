@@ -13,7 +13,8 @@ import AdminAppointments from "./pages/admin/Appointments";
 import Reviews from "./pages/admin/Review";
 import Settings from "./pages/admin/Settings";
 import AdminRoute from "./components/AdminRoute";
-
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/booking" element={<Booking />} />
         <Route path="/pets" element={<MyPets />} />
         <Route path="/appointments" element={<MyAppointments />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
 
         {/* ADMIN */}
         <Route element={<AdminRoute />}>
