@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./home.css";
 
-const serviceIcons = ["✂️", "🛁", "💅", "🐶", "🪥", "🌸"];
+const serviceIcons = ["🌸", "🐶", "🛁", "🛁", "✂️"];
 
 const benefits = [
   {
