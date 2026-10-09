@@ -1,3 +1,4 @@
+
 const express = require("express");
 
 const {
@@ -5,6 +6,7 @@ const {
   getMyAppointments,
   getAllAppointments,
   updateAppointmentStatus,
+  cancelAppointment,
 } = require("../controllers/appointmentController");
 
 const authenticateToken = require("../middleware/authMiddleware");
@@ -25,6 +27,14 @@ router.get(
   "/my",
   authenticateToken,
   getMyAppointments
+);
+
+
+// CANCEL APPOINTMENT - CUSTOMER
+router.patch(
+  "/:id/cancel",
+  authenticateToken,
+  cancelAppointment
 );
 
 

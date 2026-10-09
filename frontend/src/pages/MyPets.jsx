@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -8,6 +7,8 @@ function MyPets() {
   const [pets, setPets] = useState([]);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [deletingPetId, setDeletingPetId] = useState(null);
+  const [editingPetId, setEditingPetId] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -59,30 +60,136 @@ function MyPets() {
     getPets();
   }, []);
 
+  
+const handleEditPet = (pet) => {
+  const birthday = pet.birth_day
+    ? String(pet.birth_day).slice(0, 10)
+    : "";
+
+  setEditingPetId(pet.pet_id);
+
+  setFormData({
+    name: pet.name || "",
+    pet_type: pet.pet_type || "",
+    breed: pet.breed || "",
+    sex: pet.sex || "",
+    birth_day: birthday,
+    notes: pet.notes || "",
+  });
+
+  setMessage("");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
+const handleCancelEdit = () => {
+  setEditingPetId(null);
+
+  setFormData({
+    name: "",
+    pet_type: "",
+    breed: "",
+    sex: "",
+    birth_day: "",
+    notes: "",
+  });
+
+  setMessage("");
+};
+
+
   // ADD PET
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    setMessage("Please login before saving a pet.");
+    return;
+  }
+
+  setLoading(true);
+  setMessage("");
+
+  const isEditing = editingPetId !== null;
+
+  const url = isEditing
+    ? `http://localhost:5000/api/pets/${editingPetId}`
+    : "http://localhost:5000/api/pets";
+
+  try {
+    const response = await fetch(url, {
+      method: isEditing ? "PUT" : "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    setMessage(
+      data.message ||
+        (response.ok
+          ? "Pet saved successfully!"
+          : "Failed to save pet.")
+    );
+
+    if (response.ok) {
+      setEditingPetId(null);
+
+      setFormData({
+        name: "",
+        pet_type: "",
+        breed: "",
+        sex: "",
+        birth_day: "",
+        notes: "",
+      });
+
+      await getPets();
+    }
+  } catch (error) {
+    console.error("Save pet error:", error);
+    setMessage("Unable to connect to the server.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+  
+  // DELETE PET
+  const handleDeletePet = async (petId, petName) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${petName}? This action cannot be undone.`
+    );
+
+    if (!confirmed) return;
 
     const token = localStorage.getItem("token");
 
     if (!token) {
-      setMessage("Please login before adding a pet.");
+      setMessage("Please login before deleting a pet.");
       return;
     }
 
-    setLoading(true);
+    setDeletingPetId(petId);
     setMessage("");
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/pets",
+        `http://localhost:5000/api/pets/${petId}`,
         {
-          method: "POST",
+          method: "DELETE",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(formData),
         }
       );
 
@@ -91,29 +198,21 @@ function MyPets() {
       setMessage(
         data.message ||
           (response.ok
-            ? "Pet added successfully!"
-            : "Failed to add pet.")
+            ? "Pet deleted successfully!"
+            : "Failed to delete pet.")
       );
 
       if (response.ok) {
-        setFormData({
-          name: "",
-          pet_type: "",
-          breed: "",
-          sex: "",
-          birth_day: "",
-          notes: "",
-        });
-
-        getPets();
+        await getPets();
       }
     } catch (error) {
-      console.error(error);
+      console.error("Delete pet error:", error);
       setMessage("Unable to connect to the server.");
     } finally {
-      setLoading(false);
+      setDeletingPetId(null);
     }
   };
+
 
   // FORMAT BIRTHDAY
   const formatBirthday = (date) => {
@@ -167,7 +266,7 @@ function MyPets() {
                   <span className="mypets-section-label mypets-pink">
                     NEW PROFILE
                   </span>
-                  <h2>Add a Pet</h2>
+                  <h2>{editingPetId !== null ? "Edit Pet" : "Add a Pet"}</h2>
                 </div>
 
                 <div className="mypets-add-icon">
@@ -292,8 +391,23 @@ function MyPets() {
                   type="submit"
                   disabled={loading}
                 >
-                  {loading ? "Adding Pet..." : "+ Add Pet"}
+                  {loading
+                    ? "Saving..."
+                    : editingPetId !== null
+                    ? "Save Changes"
+                    : "+ Add Pet"}
                 </button>
+
+                {editingPetId !== null && (
+                  <button
+                    type="button"
+                    className="mypets-cancel-edit-btn"
+                    onClick={handleCancelEdit}
+                    disabled={loading}
+                  >
+                    Cancel Editing
+                  </button>
+                )}
               </form>
 
               {message && (
@@ -370,6 +484,26 @@ function MyPets() {
                           {pet.notes}
                         </div>
                       )}
+                      
+                      
+                      <div className="mypets-pet-actions">
+                        <button
+                          type="button"
+                          className="mypets-edit-btn"
+                          onClick={() => handleEditPet(pet)}
+                        >
+                          Edit
+                        </button>
+
+                        <button
+                          type="button"
+                          className="mypets-delete-btn"
+                          onClick={() => handleDeletePet(pet.pet_id, pet.name)}
+                          disabled={deletingPetId === pet.pet_id}
+                        >
+                          {deletingPetId === pet.pet_id ? "Deleting..." : "Delete"}
+                        </button>
+                      </div>
                     </article>
                   ))}
                 </div>

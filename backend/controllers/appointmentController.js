@@ -299,10 +299,78 @@ const updateAppointmentStatus = (req, res) => {
   );
 };
 
+// CANCEL APPOINTMENT - CUSTOMER
+const cancelAppointment = (req, res) => {
+  const appointmentId = req.params.id;
+  const userId = req.user.id;
+
+  // Validate appointment ID
+  if (!/^[1-9]\d*$/.test(String(appointmentId))) {
+    return res.status(400).json({
+      message: "Invalid appointment ID.",
+    });
+  }
+
+  // Cancel only the logged-in customer's eligible appointment
+  db.query(
+    `UPDATE appointments
+     SET status = 'cancelled'
+     WHERE appointment_id = ?
+       AND user_id = ?
+       AND status IN ('pending', 'confirmed')`,
+    [appointmentId, userId],
+    (error, result) => {
+      if (error) {
+        console.error("Cancel appointment error:", error);
+
+        return res.status(500).json({
+          message: "Failed to cancel appointment.",
+        });
+      }
+
+      if (result.affectedRows > 0) {
+        return res.status(200).json({
+          message: "Appointment cancelled successfully!",
+        });
+      }
+
+      // Determine why the appointment could not be cancelled
+      db.query(
+        `SELECT status
+         FROM appointments
+         WHERE appointment_id = ?
+           AND user_id = ?`,
+        [appointmentId, userId],
+        (checkError, results) => {
+          if (checkError) {
+            console.error("Check appointment error:", checkError);
+
+            return res.status(500).json({
+              message: "Failed to verify appointment.",
+            });
+          }
+
+          if (results.length === 0) {
+            return res.status(404).json({
+              message: "Appointment not found.",
+            });
+          }
+
+          return res.status(400).json({
+            message:
+              "This appointment cannot be cancelled because it is already completed or cancelled.",
+          });
+        }
+      );
+    }
+  );
+};
+
 
 module.exports = {
   createAppointment,
   getMyAppointments,
   getAllAppointments,
   updateAppointmentStatus,
+  cancelAppointment,
 };
